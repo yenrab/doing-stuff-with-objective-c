@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  safe_multiply
+//  safe_multiply2
 //
 //  Created by Lee Barney on 9/17/14.
 //  Copyright (c) 2014 Lee Barney. All rights reserved.
@@ -24,19 +24,15 @@
     NSString *displayValue = nil;
     long firstNumber = _firstNumberInput.text.intValue;
     long secondNumber = _secondNumberInput.text.intValue;
-    if (firstNumber != 0){
-        if( secondNumber != 0) {
-            long product = [self multiply:firstNumber by:secondNumber];
-            displayValue = [NSString stringWithFormat:@"%ld",product];
-        }
-        else{
-            displayValue = @"0 (Second number oops??)";
-        }
+    if (firstNumber != 0 && secondNumber != 0){
+        long product = [self multiply:firstNumber by:secondNumber];
+        displayValue = [NSString stringWithFormat:@"%ld",product];
     }
     else{
-        displayValue = @"0 (First number oops??)";
+        displayValue = @"0 (Number oops??)";
     }
     _productLabel.text = displayValue;
+    
 }
 
 - (void)viewDidLoad {
