@@ -1,8 +1,8 @@
 //
 //  ViewController.m
-//  read_from_file
+//  write_to_file
 //
-//  Created by Lee Barney on 10/3/14.
+//  Created by Lee Barney on 10/7/14.
 //  Copyright (c) 2014 Lee Barney. All rights reserved.
 //
 
@@ -18,8 +18,6 @@
 
 - (IBAction)createCustomer:(id)sender;
 - (IBAction)writeCustomersToFile:(id)sender;
-- (IBAction)readCustomersFromFile:(id)sender;
-
 
 @end
 
@@ -53,27 +51,5 @@
         customersString = [customersString stringByAppendingString:aCustomerStorageString];
     }
     [customersString writeToFile:datapath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-}
-
-- (IBAction)readCustomersFromFile:(id)sender {
-    [_customers removeAllObjects];
-    _customerDisplay.text = @"";
-    NSString *documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *datapath = [documentsDirectoryPath stringByAppendingPathComponent:@"customer.data"];
-    NSString *customersString = [NSString stringWithContentsOfFile:datapath encoding:NSUTF8StringEncoding error:nil];
-    if (customersString != nil) {
-        NSArray *customerStringArray = [customersString componentsSeparatedByString:@"\n"];
-        for (NSString *aCustomerString in customerStringArray) {
-            if (aCustomerString.length != 0){
-                NSArray *values = [aCustomerString componentsSeparatedByString:@" "];
-                ClothingCustomer *aCustomer = [[ClothingCustomer alloc] init:values[0] withAge:((NSString*)values[1]).intValue andInseam:((NSString*)values[2]).doubleValue];
-                [_customers addObject:aCustomer];
-            }
-        }
-        _customerDisplay.text = [_customers description];
-    }
-    else{
-        _customerDisplay.text = @"Oops. Custmers must be saved before they can be loaded.";
-    }
 }
 @end
